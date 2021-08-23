@@ -1,6 +1,7 @@
 package com.vn.entity;
 
 import javax.persistence.Basic;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
@@ -31,5 +32,8 @@ public class Account extends BaseEntity {
 	private Boolean admin;
 
 	private String password;
+	
+	@Embedded
+	private AccountDetail detail;
 
 }

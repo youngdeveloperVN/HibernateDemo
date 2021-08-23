@@ -9,8 +9,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 
 /**
@@ -22,6 +25,9 @@ import lombok.Setter;
 @Entity
 @NamedQuery(name="Product.findAll", query="SELECT p FROM Product p")
 @Embeddable
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class Product extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 
@@ -42,5 +48,5 @@ public class Product extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
-
+	
 }
