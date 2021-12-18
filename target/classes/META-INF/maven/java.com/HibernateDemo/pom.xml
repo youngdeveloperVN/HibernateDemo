@@ -15,7 +15,6 @@
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
 
-
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
 		<dependency>
