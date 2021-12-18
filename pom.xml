@@ -11,6 +11,8 @@
 	<properties>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
+		  <sonar.organization>youngdevelopervn</sonar.organization>
+			  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
 
 
@@ -21,11 +23,6 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>5.5.5.Final</version>
 		</dependency>
-		
-		<properties>
-			  <sonar.organization>youngdevelopervn</sonar.organization>
-			  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-			</properties>
 
 		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 		<dependency>
