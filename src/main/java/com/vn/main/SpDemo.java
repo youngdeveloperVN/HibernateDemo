@@ -6,16 +6,19 @@ import javax.persistence.ParameterMode;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.annotations.common.util.impl.LoggerFactory;
 import org.hibernate.procedure.ProcedureCall;
 import org.hibernate.procedure.ProcedureOutputs;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.result.UpdateCountOutput;
+import org.jboss.logging.Logger;
 
 import com.vn.ulti.HibernateUtil;
 
 public class SpDemo {
 	
 	private static SessionFactory factory = HibernateUtil.getSessionFactory();
+	private static Logger logger = LoggerFactory.logger(SpDemo.class);
 	
 	public static void main(String[] args) {
 		
@@ -38,7 +41,7 @@ public class SpDemo {
 			List result = q.getResultList();
 			
 			result.forEach(e -> {
-				System.out.println(e);
+				logger.info(e);
 			});
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -65,7 +68,7 @@ public class SpDemo {
 			
 			UpdateCountOutput resultSet  = (UpdateCountOutput)procedureOutputs.getCurrent();
 			int count = (int) procedureOutputs.getOutputParameterValue("count");
-			System.out.println(count);
+			logger.info(count);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

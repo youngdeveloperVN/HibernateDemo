@@ -8,6 +8,8 @@ import javax.persistence.TypedQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.annotations.common.util.impl.LoggerFactory;
+import org.jboss.logging.Logger;
 
 import com.vn.entity.Category;
 import com.vn.entity.Product;
@@ -16,6 +18,7 @@ import com.vn.ulti.HibernateUtil;
 public class CategoryMain {
 	
 	private static SessionFactory factory = HibernateUtil.getSessionFactory();
+	private static Logger logger = LoggerFactory.logger(CategoryMain.class);
 	
 	
 	public static void main(String[] args) {
@@ -24,7 +27,7 @@ public class CategoryMain {
 		category.setName("Category");
 
 		//todo set list product
-		category.setProducts(new ArrayList<Product>());
+		category.setProducts(new ArrayList<>());
 		
 		
 		Product product = new Product();
@@ -44,7 +47,7 @@ public class CategoryMain {
 		
 		if(list != null) {
 			list.forEach(e -> {
-				System.out.println(e);
+				logger.info(e.getName());
 			});
 		}
 		
@@ -79,12 +82,12 @@ public class CategoryMain {
 	
 	private static List<Category> getAllCategory(){
 		Session session = null;
+		List<Category> result = null;
 		try {
 			session = factory.openSession();
 			@SuppressWarnings("unchecked")
 			TypedQuery<Category> query = session.createQuery("FROM Category");
-			List<Category> result = query.getResultList();
-			return result;
+			result = query.getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -92,7 +95,7 @@ public class CategoryMain {
 				session.close();
 			}
 		}
-		return null;
+		return result;
 	}
 
 }

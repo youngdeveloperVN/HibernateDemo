@@ -37,10 +37,4 @@ public class Category extends BaseEntity {
 	@Cascade(value = {org.hibernate.annotations.CascadeType.ALL})
 	private List<Product> products;
 	
-//	@PrePersist
-//	public void prePersist() {
-//		this.setCreateDate(new Date());
-//	}
-//	
-
 }

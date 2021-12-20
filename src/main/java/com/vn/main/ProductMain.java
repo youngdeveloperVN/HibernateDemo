@@ -9,6 +9,8 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.annotations.common.util.impl.LoggerFactory;
+import org.jboss.logging.Logger;
 
 import com.vn.entity.Category;
 import com.vn.entity.Product;
@@ -18,13 +20,14 @@ import com.vn.ulti.HibernateUtil;
 public class ProductMain {
 
 	private static SessionFactory factory = HibernateUtil.getSessionFactory();
+	private static Logger logger = LoggerFactory.logger(ProductMain.class);
 
 	public static void main(String[] args) {
 
 		List<ProductAndCategory> products = report("C2", 1, 3);
 		if(products != null) {
 			products.forEach(e -> {
-				System.out.println(e);
+				logger.info(e);
 			});
 		}
 
@@ -33,6 +36,7 @@ public class ProductMain {
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	private static List<Product> getAllProduct(String name, int pageNumber, int pageSize) {
 		Session session = null;
+		List<Product> result = null;
 		try {
 			session = factory.openSession();
 			CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -47,7 +51,7 @@ public class ProductMain {
 			q.setFirstResult((pageNumber - 1) * pageSize);
 			q.setMaxResults(pageSize);
 
-			return q.getResultList();
+			result = q.getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -55,7 +59,7 @@ public class ProductMain {
 				session.close();
 			}
 		}
-		return null;
+		return result;
 	}
 	
 	private static List<ProductAndCategory> report(String name, int pageNumber, int pageSize) {
@@ -81,7 +85,7 @@ public class ProductMain {
 			q.setMaxResults(pageSize);
 			List<ProductAndCategory> result = q.getResultList();
 			
-			System.out.println(result.size());
+			logger.info(result.size());
 
 			return result;
 		} catch (Exception e) {
