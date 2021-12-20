@@ -22,9 +22,11 @@ public class ProductMain {
 	public static void main(String[] args) {
 
 		List<ProductAndCategory> products = report("C2", 1, 3);
-		products.forEach(e -> {
-			System.out.println(e);
-		});
+		if(products != null) {
+			products.forEach(e -> {
+				System.out.println(e);
+			});
+		}
 
 	}
 

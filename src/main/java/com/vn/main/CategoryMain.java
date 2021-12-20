@@ -42,9 +42,11 @@ public class CategoryMain {
 
 		List<Category>  list = getAllCategory();
 		
-		list.forEach(e -> {
-			System.out.println(e);
-		});
+		if(list != null) {
+			list.forEach(e -> {
+				System.out.println(e);
+			});
+		}
 		
 		createCategory(category);
 		
